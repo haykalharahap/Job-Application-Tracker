@@ -128,6 +128,26 @@ function appReducer(state, action) {
       return state.filter((app) => app.id !== action.payload);
     case 'UPDATE_STATUS':
       return state.map((app) => (app.id === action.payload.id ? { ...app, status: action.payload.status } : app));
+    case 'MOVE_APPLICATION': {
+      const { source, destination, draggableId } = action.payload;
+      const newState = [...state];
+      const itemIndex = newState.findIndex(a => a.id === draggableId);
+      if (itemIndex === -1) return state;
+      
+      const [item] = newState.splice(itemIndex, 1);
+      item.status = destination.droppableId;
+      
+      const destItems = newState.filter(a => a.status === destination.droppableId);
+      
+      if (destItems.length === 0 || destination.index >= destItems.length) {
+        newState.push(item);
+      } else {
+        const targetItem = destItems[destination.index];
+        const targetIndex = newState.findIndex(a => a.id === targetItem.id);
+        newState.splice(targetIndex, 0, item);
+      }
+      return newState;
+    }
     case 'SET_APPLICATIONS':
       return action.payload;
     default:
