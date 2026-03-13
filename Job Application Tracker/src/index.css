@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: oklch(0.97 0.02 260);
+  --color-brand-100: oklch(0.93 0.04 260);
+  --color-brand-200: oklch(0.87 0.07 260);
+  --color-brand-300: oklch(0.78 0.11 260);
+  --color-brand-400: oklch(0.68 0.16 260);
+  --color-brand-500: oklch(0.58 0.2 260);
+  --color-brand-600: oklch(0.5 0.2 260);
+  --color-brand-700: oklch(0.43 0.18 260);
+  --color-brand-800: oklch(0.37 0.14 260);
+  --color-brand-900: oklch(0.31 0.1 260);
+
+  --color-surface-50: oklch(0.985 0 0);
+  --color-surface-100: oklch(0.97 0 0);
+  --color-surface-200: oklch(0.92 0 0);
+  --color-surface-300: oklch(0.87 0 0);
+  --color-surface-700: oklch(0.35 0 0);
+  --color-surface-800: oklch(0.25 0.005 260);
+  --color-surface-850: oklch(0.21 0.008 260);
+  --color-surface-900: oklch(0.17 0.01 260);
+  --color-surface-950: oklch(0.13 0.015 260);
+
+  --color-status-applied: oklch(0.65 0.15 250);
+  --color-status-screening: oklch(0.72 0.17 65);
+  --color-status-technical: oklch(0.65 0.18 300);
+  --color-status-interview: oklch(0.68 0.16 175);
+  --color-status-offer: oklch(0.7 0.18 145);
+  --color-status-rejected: oklch(0.65 0.2 25);
+}
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode */
+body {
+  background-color: var(--color-surface-100);
+  background-image: 
+    radial-gradient(circle at 15% 50%, oklch(0.94 0.06 250 / 0.8), transparent 40%),
+    radial-gradient(circle at 85% 30%, oklch(0.93 0.08 280 / 0.8), transparent 40%),
+    radial-gradient(circle at 50% 100%, oklch(0.92 0.05 320 / 0.5), transparent 40%),
+    radial-gradient(oklch(0.7 0.1 260 / 0.4) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px;
+  background-position: 0 0, 0 0, 0 0, -1.5px -1.5px;
+  background-attachment: fixed;
+  color: oklch(0.2 0 0);
+}
+
+/* Dark mode */
+body.dark {
+  background-color: oklch(0.13 0.02 260); /* Very dark blueish-black */
+  background-image: 
+    radial-gradient(circle at 0% 50%, oklch(0.6 0.15 200 / 0.15), transparent 50%),   /* Teal glow on left */
+    radial-gradient(circle at 100% 0%, oklch(0.5 0.15 260 / 0.15), transparent 50%),  /* Blue glow top right */
+    radial-gradient(circle at 100% 100%, oklch(0.4 0.2 300 / 0.15), transparent 50%), /* Purple glow bottom right */
+    radial-gradient(circle at 30% 0%, oklch(0.5 0.15 10 / 0.08), transparent 40%),    /* Reddish hint top */
+    radial-gradient(oklch(0.5 0.2 220 / 0.5) 1.5px, transparent 1.5px);               /* Dot grid */
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 32px 32px;
+  background-position: 0 0, 0 0, 0 0, 0 0, -1.5px -1.5px;
+  background-attachment: fixed;
+  color: oklch(0.92 0 0);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.6 0 0 / 0.3);
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: oklch(0.5 0 0 / 0.4);
+}
+
+/* ─── Utilities ─── */
+.glass-light {
+  background: oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.9 0 0 / 0.6);
+}
+.dark .glass-light {
+  background: oklch(0.2 0.01 260 / 0.6);
+  border-color: oklch(0.35 0.02 260 / 0.3);
+}
+
+.glass-card {
+  background: oklch(1 0 0 / 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid oklch(0.92 0 0);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.06);
+}
+.dark .glass-card {
+  background: oklch(0.22 0.01 260 / 0.7);
+  border-color: oklch(0.32 0.02 260 / 0.4);
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.2), 0 1px 2px oklch(0 0 0 / 0.15);
+}
+
+/* Status badge colors */
+.badge-applied { background: oklch(0.93 0.06 250); color: oklch(0.4 0.15 250); }
+.dark .badge-applied { background: oklch(0.3 0.08 250); color: oklch(0.8 0.1 250); }
+
+.badge-screening { background: oklch(0.93 0.07 65); color: oklch(0.45 0.15 65); }
+.dark .badge-screening { background: oklch(0.3 0.08 65); color: oklch(0.82 0.12 65); }
+
+.badge-technical { background: oklch(0.93 0.07 300); color: oklch(0.45 0.15 300); }
+.dark .badge-technical { background: oklch(0.3 0.08 300); color: oklch(0.82 0.12 300); }
+
+.badge-interview { background: oklch(0.93 0.07 175); color: oklch(0.4 0.12 175); }
+.dark .badge-interview { background: oklch(0.3 0.08 175); color: oklch(0.82 0.12 175); }
+
+.badge-offer { background: oklch(0.93 0.08 145); color: oklch(0.4 0.15 145); }
+.dark .badge-offer { background: oklch(0.3 0.09 145); color: oklch(0.82 0.14 145); }
+
+.badge-rejected { background: oklch(0.93 0.06 25); color: oklch(0.5 0.18 25); }
+.dark .badge-rejected { background: oklch(0.3 0.08 25); color: oklch(0.8 0.14 25); }
+
+/* Column header accent bars */
+.col-applied { border-top-color: var(--color-status-applied); }
+.col-screening { border-top-color: var(--color-status-screening); }
+.col-technical { border-top-color: var(--color-status-technical); }
+.col-interview { border-top-color: var(--color-status-interview); }
+.col-offer { border-top-color: var(--color-status-offer); }
+.col-rejected { border-top-color: var(--color-status-rejected); }
